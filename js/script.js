@@ -1,5 +1,14 @@
-function helloWorld() {
-  console.log("Hello World");
+const listInput = document.querySelector("#listInput");
+const addButton = document.querySelector("#addButton");
+const list = document.querySelector("#list");
+
+function addItem() {
+  const inputValue = listInput.value;
+  const li = document.createElement("li");
+
+  li.innerText = inputValue;
+
+  list.appendChild(li);
 }
 
-helloWorld();
+addButton.addEventListener("click", addItem);
