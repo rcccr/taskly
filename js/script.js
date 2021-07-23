@@ -9,6 +9,8 @@ function addItem() {
   li.innerText = inputValue;
 
   list.appendChild(li);
+
+  listInput.value = "";
 }
 
 addButton.addEventListener("click", addItem);
