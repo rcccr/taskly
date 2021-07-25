@@ -16,7 +16,13 @@ function addItem() {
 }
 
 function toggleEditItem(e) {
-  console.log(e.currentTarget);
+  const textSpan = e.currentTarget;
+
+  textSpan.classList.add("hide");
+
+  textSpan.parentNode.querySelector(".jsEditForm").classList.remove("hide");
+
+  textSpan.parentNode.querySelector(".jsDeleteButton").classList.add("hide");
 }
 
 function editItem() {
@@ -36,15 +42,18 @@ function createListItem() {
   textSpan.addEventListener("click", toggleEditItem);
 
   textSpan.innerText = listInput.value;
+  editButton.innerText = "Done";
   deleteButton.innerText = "Delete";
 
-  editInput.classList.add("hide");
+  textSpan.classList.add("jsTextSpan");
+  deleteButton.classList.add("jsDeleteButton");
+  editForm.classList.add("hide", "jsEditForm");
 
   editForm.appendChild(editInput);
   editForm.appendChild(editButton);
 
   li.appendChild(textSpan);
-  li.appendChild(editInput);
+  li.appendChild(editForm);
   li.appendChild(deleteButton);
 
   return li;
