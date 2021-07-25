@@ -15,11 +15,36 @@ function addItem() {
   listInput.value = "";
 }
 
+function toggleEditItem(e) {
+  console.log(e.currentTarget);
+}
+
+function editItem() {
+  console.log("edit successful");
+}
+
 function createListItem() {
   const li = document.createElement("li");
+  const textSpan = document.createElement("span");
   const deleteButton = document.createElement("button");
+  const editForm = document.createElement("form");
+  const editInput = document.createElement("input");
+  const editButton = document.createElement("button");
+
   deleteButton.addEventListener("click", deleteItem);
-  li.innerText = listInput.value;
+  editForm.addEventListener("submit", editItem);
+  textSpan.addEventListener("click", toggleEditItem);
+
+  textSpan.innerText = listInput.value;
+  deleteButton.innerText = "Delete";
+
+  editInput.classList.add("hide");
+
+  editForm.appendChild(editInput);
+  editForm.appendChild(editButton);
+
+  li.appendChild(textSpan);
+  li.appendChild(editInput);
   li.appendChild(deleteButton);
 
   return li;
