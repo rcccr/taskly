@@ -15,18 +15,29 @@ function addItem() {
   listInput.value = "";
 }
 
-function toggleEditItem(e) {
-  const textSpan = e.currentTarget;
+function toggleEditItem(e, parent) {
+  let parentEl;
 
-  textSpan.classList.add("hide");
+  if (parent) {
+    parentEl = parent;
+  } else {
+    parentEl = e.currentTarget.parentNode;
+  }
 
-  textSpan.parentNode.querySelector(".jsEditForm").classList.remove("hide");
-
-  textSpan.parentNode.querySelector(".jsDeleteButton").classList.add("hide");
+  parentEl.querySelector(".jsTextSpan").classList.toggle("hide");
+  parentEl.querySelector(".jsEditForm").classList.toggle("hide");
+  parentEl.querySelector(".jsDeleteButton").classList.toggle("hide");
 }
 
-function editItem() {
-  console.log("edit successful");
+function editItem(e) {
+  e.preventDefault();
+
+  const newValue = e.currentTarget.querySelector("input").value;
+  const textEl = e.currentTarget.parentNode.querySelector(".jsTextSpan");
+
+  textEl.innerText = newValue;
+
+  toggleEditItem(e, e.currentTarget.parentNode);
 }
 
 function createListItem() {
@@ -44,6 +55,7 @@ function createListItem() {
   textSpan.innerText = listInput.value;
   editButton.innerText = "Done";
   deleteButton.innerText = "Delete";
+  editInput.value = listInput.value;
 
   textSpan.classList.add("jsTextSpan");
   deleteButton.classList.add("jsDeleteButton");
