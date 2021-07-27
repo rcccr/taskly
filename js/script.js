@@ -9,6 +9,12 @@ function deleteItem(e) {
   const liToDelete = e.currentTarget.parentNode;
 
   list.removeChild(liToDelete);
+
+  const newData = data.data.filter((item) => item.id !== liToDelete.dataset.id);
+
+  data = { ...data, data: newData };
+
+  localStorage.setItem("tasklyData", JSON.stringify(data));
 }
 
 function addItem() {
@@ -17,8 +23,11 @@ function addItem() {
   }
 
   const elData = {
+    id: new Date(),
     task: listInput.value,
   };
+
+  console.log(elData);
 
   const li = createListItem(elData);
   list.appendChild(li);
@@ -66,6 +75,7 @@ function createListItem(elData) {
   editForm.addEventListener("submit", editItem);
   textSpan.addEventListener("click", toggleEditItem);
 
+  li.setAttribute("data-id", elData.id);
   textSpan.innerText = elData.task;
   editButton.innerText = "Done";
   deleteButton.innerText = "Delete";
