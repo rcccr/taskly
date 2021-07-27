@@ -1,6 +1,9 @@
 const listInput = document.querySelector("#listInput");
 const addButton = document.querySelector("#addButton");
 const list = document.querySelector("#list");
+let data = {
+  data: [],
+};
 
 function deleteItem(e) {
   const liToDelete = e.currentTarget.parentNode;
@@ -13,10 +16,17 @@ function addItem() {
     return;
   }
 
-  const li = createListItem();
+  const elData = {
+    task: listInput.value,
+  };
+
+  const li = createListItem(elData);
   list.appendChild(li);
 
   listInput.value = "";
+
+  data.data.push(elData);
+  localStorage.setItem("tasklyData", JSON.stringify(data));
 }
 
 function toggleEditItem(e, parent) {
@@ -44,7 +54,7 @@ function editItem(e) {
   toggleEditItem(e, e.currentTarget.parentNode);
 }
 
-function createListItem() {
+function createListItem(elData) {
   const li = document.createElement("li");
   const textSpan = document.createElement("span");
   const deleteButton = document.createElement("button");
@@ -56,10 +66,10 @@ function createListItem() {
   editForm.addEventListener("submit", editItem);
   textSpan.addEventListener("click", toggleEditItem);
 
-  textSpan.innerText = listInput.value;
+  textSpan.innerText = elData.task;
   editButton.innerText = "Done";
   deleteButton.innerText = "Delete";
-  editInput.value = listInput.value;
+  editInput.value = elData.task;
 
   textSpan.classList.add("jsTextSpan");
   deleteButton.classList.add("jsDeleteButton");
@@ -73,6 +83,23 @@ function createListItem() {
   li.appendChild(deleteButton);
 
   return li;
+}
+
+function populateData() {
+  let dataFragment = document.createDocumentFragment();
+  data.data.forEach((item) => {
+    const li = createListItem(item);
+    dataFragment.appendChild(li);
+  });
+
+  list.appendChild(dataFragment);
+}
+
+if (!localStorage.tasklyData) {
+  localStorage.setItem("tasklyData", JSON.stringify(data));
+} else {
+  data = JSON.parse(localStorage.getItem("tasklyData"));
+  populateData();
 }
 
 addButton.addEventListener("click", addItem);
