@@ -9,6 +9,10 @@ function deleteItem(e) {
 }
 
 function addItem() {
+  if (listInput.value.replace(/ /g, "") === "") {
+    return;
+  }
+
   const li = createListItem();
   list.appendChild(li);
 
