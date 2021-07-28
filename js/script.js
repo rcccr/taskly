@@ -56,11 +56,21 @@ function editItem(e) {
   e.preventDefault();
 
   const newValue = e.currentTarget.querySelector("input").value;
-  const textEl = e.currentTarget.parentNode.querySelector(".jsTextSpan");
+  const parentNode = e.currentTarget.parentNode;
+  const newData = data.data.map((item) => {
+    if (item.id === parentNode.dataset.id) {
+      return { ...item, task: newValue };
+    }
 
-  textEl.innerText = newValue;
+    return item;
+  });
 
-  toggleEditItem(e, e.currentTarget.parentNode);
+  parentNode.querySelector(".jsTextSpan").innerText = newValue;
+
+  data = { ...data, data: newData };
+  localStorage.setItem("tasklyData", JSON.stringify(data));
+
+  toggleEditItem(e, parentNode);
 }
 
 function createListItem(elData) {
