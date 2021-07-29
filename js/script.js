@@ -1,5 +1,5 @@
 const listInput = document.querySelector("#listInput");
-const addButton = document.querySelector("#addButton");
+const listInputForm = document.querySelector("#listInputForm");
 const list = document.querySelector("#list");
 let data = {
   data: [],
@@ -17,7 +17,9 @@ function deleteItem(e) {
   localStorage.setItem("tasklyData", JSON.stringify(data));
 }
 
-function addItem() {
+function addItem(e) {
+  e.preventDefault();
+
   if (listInput.value.replace(/ /g, "") === "") {
     return;
   }
@@ -122,4 +124,4 @@ if (!localStorage.tasklyData) {
   populateData();
 }
 
-addButton.addEventListener("click", addItem);
+listInputForm.addEventListener("submit", addItem);
