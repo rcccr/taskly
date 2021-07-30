@@ -87,6 +87,10 @@ function createListItem(elData) {
   editForm.addEventListener("submit", editItem);
   textSpan.addEventListener("click", toggleEditItem);
 
+  deleteButton.classList.add("btn", "delete-btn");
+  editButton.classList.add("btn", "edit-btn");
+
+  editInput.setAttribute("type", "text");
   li.setAttribute("data-id", elData.id);
   textSpan.innerText = elData.task;
   editButton.innerText = "Done";
