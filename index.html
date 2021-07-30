@@ -23,8 +23,14 @@
     </div>
     <div class="list-area">
       <form action="" id="listInputForm">
-        <input type="text" id="listInput" class="list-input" />
-        <button id="addButton">add item</button>
+        <label for="listInput" class="sr-only">Add Item</label>
+        <input
+          type="text"
+          id="listInput"
+          class="list-input"
+          placeholder="e.g. Buy food"
+        />
+        <button id="addButton" class="btn">add item</button>
       </form>
 
       <ul class="list" id="list"></ul>

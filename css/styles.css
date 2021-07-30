@@ -32,3 +32,56 @@
   font-size: 20px;
   margin: 0;
 }
+
+input[type="text"] {
+  color: #ffffff;
+  font-size: 13px;
+  width: 200px;
+  height: 35px;
+  padding-left: 15px;
+  border: none;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important; /* 2 */
+  height: 1px !important;
+  overflow: hidden !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important; /* 3 */
+}
+
+.btn {
+  appearance: none;
+  border: 0;
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 7px 15px;
+}
+
+.list-area {
+  padding: 10px 40px;
+}
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 20px 30px;
+  background-color: #231f29;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.delete-btn {
+  margin: 0 0 0 10px;
+}
