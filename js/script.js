@@ -82,15 +82,19 @@ function createListItem(elData) {
   const editForm = document.createElement("form");
   const editInput = document.createElement("input");
   const editButton = document.createElement("button");
+  const completeCheckbox = document.createElement("input");
 
   deleteButton.addEventListener("click", deleteItem);
   editForm.addEventListener("submit", editItem);
   textSpan.addEventListener("click", toggleEditItem);
+  completeCheckbox.addEventListener("click", toggleComplete);
 
   deleteButton.classList.add("btn", "delete-btn");
   editButton.classList.add("btn", "edit-btn");
+  completeCheckbox.classList.add("checkbox", "complete-checkbox");
 
   editInput.setAttribute("type", "text");
+  completeCheckbox.setAttribute("type", "checkbox");
   li.setAttribute("data-id", elData.id);
   textSpan.innerText = elData.task;
   editButton.innerText = "Done";
@@ -104,11 +108,18 @@ function createListItem(elData) {
   editForm.appendChild(editInput);
   editForm.appendChild(editButton);
 
+  li.appendChild(completeCheckbox);
   li.appendChild(textSpan);
   li.appendChild(editForm);
   li.appendChild(deleteButton);
 
   return li;
+}
+
+function toggleComplete(e) {
+  const parent = e.currentTarget.parentNode;
+
+  parent.classList.toggle("task-complete");
 }
 
 function populateData() {
