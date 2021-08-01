@@ -25,8 +25,9 @@ function addItem(e) {
   }
 
   const elData = {
-    id: new Date(),
+    id: new Date().getTime().toString(),
     task: listInput.value,
+    completed: false,
   };
 
   console.log(elData);
@@ -95,6 +96,12 @@ function createListItem(elData) {
 
   editInput.setAttribute("type", "text");
   completeCheckbox.setAttribute("type", "checkbox");
+
+  if (elData.completed) {
+    completeCheckbox.setAttribute("checked", "checked");
+    li.classList.add("task-complete");
+  }
+
   li.setAttribute("data-id", elData.id);
   textSpan.innerText = elData.task;
   editButton.innerText = "Done";
@@ -120,6 +127,19 @@ function toggleComplete(e) {
   const parent = e.currentTarget.parentNode;
 
   parent.classList.toggle("task-complete");
+
+  const newData = data.data.map((item) => {
+    if (item.id === parent.dataset.id) {
+      console.log("here");
+      return { ...item, completed: parent.classList.contains("task-complete") };
+    }
+
+    return item;
+  });
+
+  data = { ...data, data: newData };
+  localStorage.setItem("tasklyData", JSON.stringify(data));
+  console.log(newData);
 }
 
 function populateData() {
